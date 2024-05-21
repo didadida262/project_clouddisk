@@ -16,4 +16,9 @@ export interface CateItem {
     name: string;
 }
 
+export interface eventInfo {
+    type: string;
+    data: object | any;
+}
+
 

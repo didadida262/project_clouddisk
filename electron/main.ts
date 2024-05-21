@@ -1,9 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { handleGetAllCates, handleGetAllItems, handleGetVideo, getVideoContentVersionTwo } from '../src/utils/videoApi'
+import { handleGetAllItems,handleGetAllCates, handleGetVideo } from '../src/EndServices/videoApi'
 
-const fs = require('fs')
 let mainWindow: BrowserWindow | null
-
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
@@ -36,9 +34,6 @@ function createWindow () {
 }
 
 async function registerListeners () {
-  /**
-   * This comes from bridge integration, check bridge.ts
-   */
   ipcMain.on('message', (event: any, message: any) => {
     console.log('main-get>>', message)
     switch(message.type) {
@@ -50,7 +45,6 @@ async function registerListeners () {
         break;
       case 'getVideoContent':
         handleGetVideo(event, message)
-        // getVideoContentVersionTwo(event, message)
         break;
       default:
         break;
@@ -63,13 +57,13 @@ app.on('ready', createWindow)
   .then(registerListeners)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  // if (process.platform !== 'darwin') {
+  //   app.quit()
+  // }
 })
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createWindow()
+//   }
+// })

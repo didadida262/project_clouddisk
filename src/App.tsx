@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import { GlobalStyle } from './styles/GlobalStyle'
 import { CategoriesComponent } from './components/Video/CategoriesComponent'
 import { HeaderComponent } from './components/Video/HeaderComponent'
-// import SearchComponent from './components/Video/Search'
+import SearchComponent from './components/Video/Search'
 import { VideoComponent } from './components/Video/VideoComponent'
 import { IPCInfo, VideoItem, CateItem } from './utils/index'
 import { getRandomNum } from './utils/weapons'
@@ -74,12 +74,12 @@ const App = () => {
   }
 
   const filterVideoList = (data: string) => {
-    // console.log('父组件收到>>>', data)
-    // console.log('videoList>>>', videoList)
     const res = videoList.filter((video: VideoItem) => video.name.includes(data))
   }
-  const handleSearch = (data: String) => {
-    console.log('data>>>搜索', data)
+  const handleSearch = (data: string) => {
+    const target = videoList.findIndex((item: VideoItem) => item.name.includes(data))
+    getVideo(videoList[target])
+
   }
 
   const getAllCates = () => {
@@ -116,9 +116,9 @@ const App = () => {
           categoriesList = { categoriesList }
           currentCateInfo = { currentCateInfo }
           videoList = { videoList }/>
-        {/* <SearchComponent
+        <SearchComponent
           handleSearch={handleSearch}
-          /> */}
+          />
         <CategoriesComponent
           handleClickVideoItem = { getVideo }
           currentVideoInfo = { currentVideoInfo }

@@ -29,8 +29,9 @@ const App = () => {
       setvideoList(data)
     })
   }
-
+// 打点
   const getVideo = (videoInfo: VideoItem) => {
+    let loadedBuffer = null as any
     setvideoloading(true)
     const params = {
       type: 'getVideoContent',
@@ -38,13 +39,14 @@ const App = () => {
     } 
     window.Main.sendMessage(params as IPCInfo);
     window.Main.on('getVideoContent_back', (data: any) => {
-        const blob = new Blob([data.file], { type: 'mp4' })
-        const url = URL.createObjectURL(blob)
-        setcurrentVideoInfo({
-          ...videoInfo,
-          url: url
-        })
-        setvideoloading(false)
+      console.log('接收数据>>>', data.file)
+      const blob = new Blob([data.file], { type: 'mp4' })
+      const url = URL.createObjectURL(blob)
+      setcurrentVideoInfo({
+        ...videoInfo,
+        url: url
+      })
+      setvideoloading(false)
     })
   }
 
@@ -73,9 +75,6 @@ const App = () => {
     }
   }
 
-  const filterVideoList = (data: string) => {
-    const res = videoList.filter((video: VideoItem) => video.name.includes(data))
-  }
   const handleSearch = (data: string) => {
     const target = videoList.findIndex((item: VideoItem) => item.name.includes(data))
     getVideo(videoList[target])

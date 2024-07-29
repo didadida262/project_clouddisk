@@ -95,10 +95,10 @@ const App = () => {
   }
 
   useEffect(() => {
-    if (!videoList.length) return
-    const radndomIndex = getRandomNum(videoList.length)
-    const randomItem: VideoItem = videoList[radndomIndex]
-    getVideo(randomItem)
+    // if (!videoList.length) return
+    // const radndomIndex = getRandomNum(videoList.length)
+    // const randomItem: VideoItem = videoList[radndomIndex]
+    // getVideo(randomItem)
   }, [videoList])
 
   useEffect(() => {

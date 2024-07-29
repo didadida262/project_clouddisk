@@ -26,9 +26,10 @@ export const handleGetAllItems = (event: Electron.IpcMainInvokeEvent, message: e
 // export const handleGetVideo = (event: Electron.IpcMainInvokeEvent, message: eventInfo): void => {
 //   const path = message.data.path
 //   fs.readFile(path, (err: Error, data: any) => {
-//     console.log('data>>', data)
+//     console.log('data>>1', data)
+//     console.log('data>>2', data.length)
 //     // <Buffer 00 00 00 18 66 74 79....>
-//     console.log('data>>', typeof data)
+//     console.log('data>>3', typeof data)
 //     event.sender.send('getVideoContent_back', {
 //       name: message.data.name,
 //       file: data
@@ -46,35 +47,47 @@ export const handleGetVideo = (event: Electron.IpcMainInvokeEvent, message: even
   const videoSize = stat.size;
   console.log('videoSize>>>', videoSize)
   // 1m大小
-  const chunkSize = 1024 * 1024
+  const chunkSize = 25 * 1024 * 1024
 
 
 
 // 成功
 // 指定开始和结束的字节位置
-
+  let bytesRead = 0
+  let start = 0; // 从文件开头开始
+  let loadedBuffer = Buffer.alloc(0);
+  let end = chunkSize; // 读取10个字节
   // let readInterval = setInterval(() => {
+  //   if (end >= videoSize) {
+  //     console.log('done!!')
+  //     clearInterval(readInterval);
+  //     return;
+  //   }
 
-  const start = 0; // 从文件开头开始
-  const end = 10 * 1024*1024; // 读取10个字节
   
   // 创建可读流
-  const readStream = fs.createReadStream(videoPath, { start, end });
-  
+  const readStream = fs.createReadStream(videoPath, { start, videoSize });
   // 处理流数据
   let data = Buffer.alloc(0);
   readStream.on('data', (chunk) => {
     data = Buffer.concat([data, chunk])
+    console.log('data>>>', data)
   });
   
   // 处理流结束
   readStream.on('end', () => {
-    
+    start = end
+    end =end + chunkSize
+    loadedBuffer = Buffer.concat([loadedBuffer, data])
+    console.log('发送片段>>>')
     event.sender.send('getVideoContent_back', {
       name: message.data.name,
-      file: data
+      file: loadedBuffer
     })
+    readStream.destroy()
+
   });
+// }, 2000)
 
 // ===================
 // ===================

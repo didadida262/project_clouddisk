@@ -42,7 +42,7 @@ const createWindow = () => {
   //     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   //   })
   // })
-const targetCatePath = 'E:\\RESP\\cate_2\\【浪客剑心】“对不起 我的夫君”.mp4'
+const targetCatePath = 'F:\\RESP\\cate_2\\【浪客剑心】“对不起 我的夫君”.mp4'
 
   ipcMain.on('getCategories', (event, msg) => {
     // console.log('main-接受>>', msg)

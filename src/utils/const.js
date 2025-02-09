@@ -20,7 +20,7 @@
 
 
 const { getFiles } = require('./weapons')
-export const respPath = 'E:\\RESP'
+export const respPath = 'F:\\RESP'
 
 // 视频目录
 export const CATEGORIES_A = getFiles(respPath).map((cate) => {

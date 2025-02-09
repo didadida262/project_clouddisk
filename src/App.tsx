@@ -40,7 +40,7 @@ const App = () => {
     window.Main.sendMessage(params as IPCInfo);
     window.Main.on('getVideoContent_back', (data: any) => {
       console.log('接收数据>>>', data.file)
-      const blob = new Blob([data.file], { type: 'mp4' })
+      const blob = new Blob([data.file], { type: 'video/mp4' })
       const url = URL.createObjectURL(blob)
       setcurrentVideoInfo({
         ...videoInfo,
@@ -85,7 +85,7 @@ const App = () => {
       const params = {
         type: 'getAllCates',
         data: {
-          path: 'E:\\RESP'
+          path: 'F:\\RESP'
         }
       } 
       window.Main.sendMessage(params as IPCInfo);
@@ -93,23 +93,14 @@ const App = () => {
         setcategoriesList(data)
       })
   }
-
   useEffect(() => {
-    // if (!videoList.length) return
-    // const radndomIndex = getRandomNum(videoList.length)
-    // const randomItem: VideoItem = videoList[radndomIndex]
-    // getVideo(randomItem)
-  }, [videoList])
-
-  useEffect(() => {
-    console.log('useEffect>>>>')
     getAllCates()
   }, [])
 
   return (
     <div className='App'>
       <GlobalStyle />
-      <div className='cate-st'>
+      <div className='cate-st border-[1px] border-solid border-red'>
         <HeaderComponent
           handleClickCateItem = { handleClickCateItem }
           categoriesList = { categoriesList }

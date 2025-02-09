@@ -61,7 +61,7 @@ export class App extends Component<AppProps, AppState> {
       const params = {
         type: 'getAllCates',
         data: {
-          path: 'E:\\RESP'
+          path: 'F:\\RESP'
         }
       } 
       window.Main.sendMessage(params as IPCInfo);

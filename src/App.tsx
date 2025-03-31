@@ -7,8 +7,11 @@ import { IPCInfo, VideoItem, CateItem } from './utils/index'
 import { getRandomNum } from './utils/weapons'
 import { Spin } from 'antd'
 import './App.css'
+import usePath from './hooks/usePath'
 
 const App = () => {
+    const { currentpath } = usePath()
+    console.log('currentPath???', currentpath)
   const [ categoriesList, setcategoriesList] = useState([])
   const [ currentCateInfo, setcurrentCateInfo] = useState([]) as any
   const [ currentVideoInfo, setcurrentVideoInfo] = useState([]) as any

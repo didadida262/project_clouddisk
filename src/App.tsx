@@ -97,31 +97,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className='App'>
-      <div className='cate-st border-[1px] border-solid border-red'>
-        <HeaderComponent
-          handleClickCateItem = { handleClickCateItem }
-          categoriesList = { categoriesList }
-          currentCateInfo = { currentCateInfo }
-          videoList = { videoList }/>
-        <SearchComponent
-          handleSearch={handleSearch}
-          />
-        <CategoriesComponent
-          handleClickVideoItem = { getVideo }
-          currentVideoInfo = { currentVideoInfo }
-          videoList = { videoList }/>
-      </div>
-      <div className='videoContainer flex-cc'>
-        { videoLoading? (
-          <Spin />        
-        ): (
-          <VideoComponent
-          currentVideoInfo = { currentVideoInfo }
-          nextVideo={ switchVideo }
-        />
-        )}
-      </div>
+      <div className='App w-screen h-screen'>
     </div>
   )
 

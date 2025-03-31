@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState } from 'react'
-import { GlobalStyle } from './styles/GlobalStyle'
 import { CategoriesComponent } from './components/Video/CategoriesComponent'
 import { HeaderComponent } from './components/Video/HeaderComponent'
 import SearchComponent from './components/Video/Search'
@@ -99,7 +98,6 @@ const App = () => {
 
   return (
     <div className='App'>
-      <GlobalStyle />
       <div className='cate-st border-[1px] border-solid border-red'>
         <HeaderComponent
           handleClickCateItem = { handleClickCateItem }

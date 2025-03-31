@@ -7,7 +7,7 @@ import { VideoComponent } from './components/Video/VideoComponent'
 import { IPCInfo, VideoItem, CateItem } from './utils/index'
 import { getRandomNum } from './utils/weapons'
 import { Spin } from 'antd'
-import './App.scss'
+import './App.css'
 
 const App = () => {
   const [ categoriesList, setcategoriesList] = useState([])
@@ -85,7 +85,7 @@ const App = () => {
       const params = {
         type: 'getAllCates',
         data: {
-          path: 'F:\\RESP'
+          path: 'D:\\RESP'
         }
       } 
       window.Main.sendMessage(params as IPCInfo);

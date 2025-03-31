@@ -1,7 +1,7 @@
 
 import { Button } from 'antd'
 import { LeftCircleOutlined, RightCircleOutlined, RetweetOutlined, BorderInnerOutlined } from '@ant-design/icons';
-import './index.scss'
+import './index.css'
 import { useState } from 'react';
 
 const VideoOperationsComponent = (props: any) => {

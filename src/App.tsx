@@ -8,6 +8,7 @@ import { getRandomNum } from './utils/weapons'
 import { Spin } from 'antd'
 import './App.css'
 import usePath from './hooks/usePath'
+import SelectDir from './components/SelectDir'
 
 const App = () => {
     const { currentpath } = usePath()
@@ -101,6 +102,8 @@ const App = () => {
 
   return (
       <div className='App w-screen h-screen'>
+          <SelectDir />
+        
     </div>
   )
 

@@ -1,5 +1,10 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-import { handleGetAllItems,handleGetAllCates, handleGetVideo } from '../src/EndServices/videoApi'
+import {
+  handleGetAllItems,
+  handleGetAllCates,
+  handleGetVideo,
+} from '../src/EndServices/videoApi'
+import { handleScannerDir } from '../src/EndServices/index'
 
 let mainWindow: BrowserWindow | null
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
@@ -10,7 +15,7 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 //     ? process.resourcesPath
 //     : app.getAppPath()
 
-function createWindow () {
+function createWindow() {
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
     width: 1100,
@@ -19,8 +24,8 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
-    }
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    },
   })
 
   // mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
@@ -33,28 +38,29 @@ function createWindow () {
   })
 }
 
-async function registerListeners () {
+async function registerListeners() {
   ipcMain.on('message', (event: any, message: any) => {
     console.log('main-get>>', message)
-    switch(message.type) {
+    switch (message.type) {
+      case 'selectPath':
+        handleScannerDir(event, message)
+        break
       case 'getAllCates':
         handleGetAllCates(event, message)
-        break;
+        break
       case 'getAllVideosInCate':
         handleGetAllItems(event, message)
-        break;
+        break
       case 'getVideoContent':
         handleGetVideo(event, message)
-        break;
+        break
       default:
-        break;
+        break
     }
   })
 }
 
-app.on('ready', createWindow)
-  .whenReady()
-  .then(registerListeners)
+app.on('ready', createWindow).whenReady().then(registerListeners)
 
 app.on('window-all-closed', () => {
   // if (process.platform !== 'darwin') {

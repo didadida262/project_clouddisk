@@ -1,4 +1,5 @@
 import { eventInfo } from '../utils/index'
+import { getFileType } from '../utils/FileApi'
 import { dialog } from 'electron'
 
 const path = require('path')
@@ -19,7 +20,7 @@ export const handleScannerDir = async (
       return {
         name: file,
         path: fullPath,
-        isDirectory: fs.statSync(fullPath).isDirectory(),
+        type: getFileType(fullPath),
       }
     })
     event.sender.send('selectPath_back', { folderPath, files })

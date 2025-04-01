@@ -27,7 +27,7 @@ export default function MainPage(props: IProps) {
         </div>
         <div className="w-full h-[calc(100%_-_50px)] ">
           {categories.length ? (
-            <div className="w-full h-full flex justify-start items-start gap-x-[20px] gap-y-[20px] ">
+            <div className="w-full h-full flex justify-start items-start gap-x-[20px] gap-y-[20px] flex-wrap content-start">
               {categories.map((file: any, index: number) => (
                 <div key={index} className="w-[120px] h-[120px]">
                   <FileItem file={file}></FileItem>

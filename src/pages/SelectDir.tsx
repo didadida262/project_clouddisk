@@ -29,8 +29,8 @@ export default function SelectDir(props:IProps) {
 
   };
     return (
-        <div className="text-[white] flex justify-around items-center w-full h-full flex-col">
-            <Button onClick={handleSelectDirectory} type="primary" size="large"
+        <div className="">
+            <Button onClick={handleSelectDirectory} type="primary"
               >打开路径
             </Button>
         </div>

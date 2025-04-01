@@ -12,7 +12,8 @@ const App = () => {
 
   return (
       <div className='App w-screen h-screen'>
-          {currentpath ? <MainPage currentpath={currentpath} /> : <SelectDir setCurrentpath={setCurrentpath} setCategories={setCategories} />}
+          {/* {currentpath ? <MainPage currentpath={currentpath} /> : <SelectDir setCurrentpath={setCurrentpath} setCategories={setCategories} />} */}
+          <MainPage currentpath={currentpath} setCurrentpath={setCurrentpath} setCategories={setCategories} />
         
     </div>
   )

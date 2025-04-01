@@ -1,6 +1,8 @@
 import { useState } from "react";
 import api from "../api/index"
 import { IPCInfo } from '../utils/index'
+import { Button, Input } from "antd"
+
 
 export default function SelectDir() {
     const [files, setFiles] = useState<string[]>([]);
@@ -15,6 +17,7 @@ export default function SelectDir() {
         api.sendMessage(params as unknown as IPCInfo)
         api.on("selectPath_back", (data:any) => {
             console.log('反馈结果>>>>', data)
+            setFiles(data.files)
         })
         
     };
@@ -23,20 +26,10 @@ export default function SelectDir() {
 
   };
     return (
-        <div className="text-[white] flex justify-around items-center w-full h-full">
-            <button  onClick={handleSelectDirectory}
+        <div className="text-[white] flex justify-around items-center w-full h-full flex-col">
+            <Button onClick={handleSelectDirectory} type="primary" size="large"
               >打开路径
-            </button>
-
-      
-      <div>
-        <h3>扫描结果 ({files.length} 个文件):</h3>
-        <ul>
-          {files.map((file, index) => (
-            <li key={index}>{file}</li>
-          ))}
-        </ul>
-      </div>
+            </Button>
         </div>
 
     )

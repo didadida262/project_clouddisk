@@ -14,8 +14,6 @@ export const handleScannerDir = async (
 
   if (!result.canceled && result.filePaths.length > 0) {
     const folderPath = result.filePaths[0]
-    console.log('folderPath>>>', folderPath)
-    console.log('folderPath>>>', folderPath)
     const files = fs.readdirSync(folderPath).map((file: any) => {
       const fullPath = path.join(folderPath, file)
       return {

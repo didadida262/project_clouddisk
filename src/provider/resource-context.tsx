@@ -10,6 +10,10 @@ interface ResourcesContextType {
   currentpath: string
   categories: any[]
   sourcelist: any[]
+  selectedCate: any
+  selectedFile: any
+  setSelectedFile: (file: any) => void
+  setSelectedCate: (file: any) => void
   setCurrentpath: (path: string) => void
   setCategories: (categories: any[]) => void
   setSourcelist: (categories: any[]) => void
@@ -23,6 +27,8 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
   const [currentpath, setCurrentpath] = useState<string>('')
   const [categories, setCategories] = useState<any[]>([])
   const [sourcelist, setSourcelist] = useState<any[]>([])
+  const [selectedCate, setSelectedCate] = useState<any>({})
+  const [selectedFile, setSelectedFile] = useState<any>({})
 
   useEffect(() => {
     console.log('currentpath>>>', currentpath)
@@ -37,6 +43,10 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
         setCurrentpath,
         setSourcelist,
         setCategories,
+        selectedCate,
+        setSelectedCate,
+        selectedFile,
+        setSelectedFile,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import {
   handleGetAllCates,
   handleGetVideo,
 } from '../src/EndServices/videoApi'
-import { handleScannerDir } from '../src/EndServices/index'
+import { handleScannerDir, getAllFiles } from '../src/EndServices/index'
 
 let mainWindow: BrowserWindow | null
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
@@ -45,15 +45,18 @@ async function registerListeners() {
       case 'selectPath':
         handleScannerDir(event, message)
         break
-      case 'getAllCates':
-        handleGetAllCates(event, message)
+      case 'getAllFiles':
+        getAllFiles(event, message)
         break
-      case 'getAllVideosInCate':
-        handleGetAllItems(event, message)
-        break
-      case 'getVideoContent':
-        handleGetVideo(event, message)
-        break
+      //   case 'getAllCates':
+      //     handleGetAllCates(event, message)
+      //     break
+      //   case 'getAllVideosInCate':
+      //     handleGetAllItems(event, message)
+      //     break
+      //   case 'getVideoContent':
+      //     handleGetVideo(event, message)
+      //     break
       default:
         break
     }

@@ -7,6 +7,7 @@ import {
   FileUnknownOutlined,
 } from '@ant-design/icons'
 import cn from 'classnames'
+import { useResources } from '../provider/resource-context'
 
 interface IProps {
   file: any
@@ -23,9 +24,11 @@ const renderIcon = (type: FileType) => {
   return mapIcon[type] ? mapIcon[type] : <FileUnknownOutlined />
 }
 export default function FileItem(props: IProps) {
+  const { selectedFile, setSelectedFile } = useResources()
   const { file } = props
 
   const handleClick = () => {
+    setSelectedFile(file)
     console.log('select>>>', file)
   }
 
@@ -34,11 +37,12 @@ export default function FileItem(props: IProps) {
       className={cn(
         'w-full h-full flex flex-col justify-between items-center hover:cursor-pointer',
         'border-[1px] border-solid border-[#383b45]',
-        'hover:border-[#0acaff] hover:border-[3px]'
+        'hover:border-[#0acaff] hover:border-[3px]',
+        selectedFile.name === file.name ? 'border-[#0acaff] border-[3px]' : ''
       )}
       onClick={handleClick}
     >
-      <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[50px]">
+      <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[30px]">
         {renderIcon(file.type)}
       </div>
       <div className="w-full h-[30px] flex justify-center items-center truncate text-[12px]">

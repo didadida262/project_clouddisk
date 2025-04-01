@@ -1,9 +1,9 @@
 import { Tag, Input } from 'antd'
-import { FolderOutlined } from '@ant-design/icons'
 import { HeaderComponent } from '../components/Video/HeaderComponent'
 import { IPCInfo, VideoItem, CateItem } from '../utils/index'
 import SelectDir from '../pages/SelectDir'
 import { useResources } from '../provider/resource-context'
+import FileItem from '../components/FileItem'
 
 interface IProps {}
 
@@ -29,16 +29,8 @@ export default function MainPage(props: IProps) {
           {categories.length ? (
             <div className="w-full h-full flex justify-start items-start gap-x-[20px] gap-y-[20px] ">
               {categories.map((file: any, index: number) => (
-                <div
-                  key={index}
-                  className="w-[120px] h-[120px] markBorderL flex flex-col justify-between items-center"
-                >
-                  <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[50px]">
-                    <FolderOutlined />
-                  </div>
-                  <div className="w-full h-[30px] flex justify-center items-center truncate text-[10px] font-bold">
-                    {file.name}
-                  </div>
+                <div key={index} className="w-[120px] h-[120px]">
+                  <FileItem file={file}></FileItem>
                 </div>
               ))}
             </div>

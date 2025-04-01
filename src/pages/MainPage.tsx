@@ -5,6 +5,8 @@ import SelectDir from '../pages/SelectDir'
 import { useResources } from '../provider/resource-context'
 import FileItem from '../components/FileItem'
 import CategoryContainer from '../components/CategoryContainer'
+import FileList from '../components/FileList'
+import VideoContainer from '../components/VideoContainer'
 
 interface IProps {}
 
@@ -29,20 +31,13 @@ export default function MainPage(props: IProps) {
         <div className="cate w-[160px] h-full ">
           <CategoryContainer />
         </div>
-        <div className="w-[calc(100%_-_165px)] h-full markBorderG px-[8px] py-[8px]">
-          {categories.length ? (
-            <div className="w-full h-full flex justify-start items-start gap-x-[20px] gap-y-[20px] flex-wrap content-start">
-              {categories.map((file: any, index: number) => (
-                <div key={index} className="w-[120px] h-[120px]">
-                  <FileItem file={file}></FileItem>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="w-full h-full flex justify-center items-center">
-              <span>空...</span>
-            </div>
-          )}
+        <div className="w-[calc(100%_-_165px)] h-full flex flex-col justify-between items-center">
+          <div className="videoConatienr w-full h-[calc(100%_-_205px)]">
+            <VideoContainer />
+          </div>
+          <div className="Filelist w-full h-[200px]">
+            <FileList />
+          </div>
         </div>
       </div>
     </div>

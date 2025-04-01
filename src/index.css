@@ -21,8 +21,8 @@
   background: #0acaff;
   /* Y 轴滚动条滑块悬停颜色 */
 }
-.markBorderR {
-  border: 1px solid red;
+.markBorderL {
+  border: 1px solid #0acaff;
 }
 .markBorderG {
   border: 1px solid #383b45;

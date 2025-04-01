@@ -1,16 +1,18 @@
 import React, { Component, useEffect, useState } from 'react'
 import './App.css'
-import SelectDir from './components/SelectDir'
+import SelectDir from './pages/SelectDir'
 import useResources from './hooks/useResources'
+import MainPage from './pages/MainPage'
 
 const App = () => {
-    const {currentpath} = useResources()
-  useEffect(() => {
-  }, [])
+    const {currentpath,setCurrentpath,setCategories} = useResources()
+    useEffect(() => {
+      console.log('currentpath>>>', currentpath)
+  }, [currentpath])
 
   return (
       <div className='App w-screen h-screen'>
-          {currentpath? <div className='text-[white]'>内容去</div>:<SelectDir />}
+          {currentpath ? <MainPage currentpath={currentpath} /> : <SelectDir setCurrentpath={setCurrentpath} setCategories={setCategories} />}
         
     </div>
   )

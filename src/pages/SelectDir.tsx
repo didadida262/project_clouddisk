@@ -3,13 +3,15 @@ import api from "../api/index"
 import { IPCInfo } from '../utils/index'
 import { Button, Input } from "antd"
 
+interface IProps {
+    setCurrentpath: (data:any) => void;
+    setCategories: (data:any) => void
+}
 
-export default function SelectDir() {
-    const [files, setFiles] = useState<string[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+export default function SelectDir(props:IProps) {
+    const {setCategories, setCurrentpath} = props
 
     const handleSelectDirectory = () => {
-        console.log('api>>>', api)
         const params = {
             type: 'selectPath',
             data: ''
@@ -17,7 +19,8 @@ export default function SelectDir() {
         api.sendMessage(params as unknown as IPCInfo)
         api.on("selectPath_back", (data:any) => {
             console.log('反馈结果>>>>', data)
-            setFiles(data.files)
+            setCategories(data.files)
+            setCurrentpath(data.folderPath)
         })
         
     };

@@ -8,6 +8,8 @@ import {
 } from '@ant-design/icons'
 import cn from 'classnames'
 import { useResources } from '../provider/resource-context'
+import api from '../api/index'
+import { IPCInfo } from '../utils/index'
 
 interface IProps {
   file: any
@@ -28,7 +30,20 @@ export default function FileItem(props: IProps) {
   const { file } = props
 
   const handleClick = () => {
+    console.warn('handleClick>>>file', file)
     setSelectedFile(file)
+    const params = {
+      type: 'getVideoContent',
+      data: file.path,
+    }
+    api.sendMessage(params as unknown as IPCInfo)
+    api.on('getVideoContent_back', (data: any) => {
+      console.log('反馈结果>>>>', data)
+      setSelectedFile({
+        ...selectedFile,
+        fileContent: data.file,
+      })
+    })
     console.log('select>>>', file)
   }
 

@@ -31,7 +31,7 @@ export const handleGetVideo = (
   event: Electron.IpcMainInvokeEvent,
   message: eventInfo
 ): void => {
-  const path = message.data.path
+  const path = message.data
   fs.readFile(path, (err: Error, data: any) => {
     console.log('data>>1', data)
     console.log('data>>2', data.length)

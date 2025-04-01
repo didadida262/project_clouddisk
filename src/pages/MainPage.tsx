@@ -36,7 +36,7 @@ export default function MainPage(props: IProps) {
                   <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[50px]">
                     <FolderOutlined />
                   </div>
-                  <div className="w-full h-[30px] flex justify-center items-center truncate text-[16px] font-bold">
+                  <div className="w-full h-[30px] flex justify-center items-center truncate text-[10px] font-bold">
                     {file.name}
                   </div>
                 </div>

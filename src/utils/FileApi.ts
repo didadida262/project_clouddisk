@@ -25,6 +25,8 @@ export const getFileType = (filePath: string) => {
     case '.avi':
     case '.mov':
       return 'video'
+    case '.mp3':
+      return 'audio'
     default:
       return 'unknown'
   }

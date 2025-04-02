@@ -31,3 +31,10 @@
 .markBorderR {
   border: 1px solid red;
 }
+.selectedG {
+  border: 1px solid rgb(0, 234, 150);
+}
+
+.selectedB {
+  border: 1px solid #0acaff;
+}

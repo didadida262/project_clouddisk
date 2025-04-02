@@ -14,7 +14,7 @@ import { IPCInfo } from '../utils/index'
 interface IProps {
   file: any
 }
-type FileType = 'directory' | 'video' | 'word' | 'pdf' | 'image'
+type FileType = 'directory' | 'video' | 'word' | 'pdf' | 'image' | 'audio'
 const renderIcon = (type: FileType) => {
   const mapIcon = {
     directory: <FolderOutlined />,
@@ -22,6 +22,7 @@ const renderIcon = (type: FileType) => {
     word: <FileWordOutlined />,
     pdf: <FilePdfOutlined />,
     image: <FileImageOutlined />,
+    audio: <FileImageOutlined />,
   }
   return mapIcon[type] ? mapIcon[type] : <FileUnknownOutlined />
 }
@@ -36,10 +37,11 @@ export default function FileItem(props: IProps) {
     const url = URL.createObjectURL(blob)
     setcurrentfileurl(url)
   }
-  const handleImgFile = (file: BlobPart) => {
+  const handleCommonFile = (file: BlobPart, type: string) => {
     console.log('getVideoContent_back>>>>', file)
-    const blob = new Blob([file], { type: 'video/mp4' })
+    const blob = new Blob([file])
     const url = URL.createObjectURL(blob)
+    console.log('url>>>>', url)
     setcurrentfileurl(url)
   }
 
@@ -57,7 +59,9 @@ export default function FileItem(props: IProps) {
           handleVideoFile(data.file)
           break
         case 'image':
-          handleImgFile(data.file)
+        case 'pdf':
+        case 'audio':
+          handleCommonFile(data.file, file.type)
           break
         default:
           break

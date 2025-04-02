@@ -8,6 +8,7 @@ import CategoryContainer from '../components/CategoryContainer'
 import FileList from '../components/FileList'
 import VideoContainer from '../components/VideoContainer'
 import ImgContainer from '../components/ImgContainer'
+import AudioContainer from '../components/AudioContainer'
 
 interface IProps {}
 
@@ -41,6 +42,7 @@ export default function MainPage(props: IProps) {
           <div className="markBorderG w-full h-[calc(100%_-_125px)] px-[8px] py-[8px] ">
             {selectedFile.type === 'video' && <VideoContainer />}
             {selectedFile.type === 'image' && <ImgContainer />}
+            {selectedFile.type === 'audio' && <AudioContainer />}
           </div>
           <div className="Filelist w-full h-[120px]">
             <FileList />

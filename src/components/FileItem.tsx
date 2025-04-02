@@ -68,13 +68,12 @@ export default function FileItem(props: IProps) {
   return (
     <div
       className={cn(
-        'flex flex-col justify-between items-center hover:cursor-pointer',
+        'w-[100px] h-[110px] flex flex-col justify-between items-center hover:cursor-pointer',
         'border-[1px] border-solid border-[#383b45]',
         'hover:border-[#0acaff] hover:border-[3px]',
         selectedFile.name === file.name ? 'border-[#0acaff] border-[3px]' : ''
       )}
       onClick={handleClick}
-      style={{ width: '100px', height: '110px' }}
     >
       <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[30px]">
         {renderIcon(file.type)}

@@ -42,7 +42,7 @@ export const CATEGORIES = [...CATEGORIES_A]
 
 
 // 高等权限
-const hideRights = [ 'cate_3', 'cate_p', 'cate_g',]
+const hideRights = ['cate_3', 'cate_p', 'cate_g',]
 
 // const CATEGORIES = {
 //     Mv: {

@@ -30,6 +30,19 @@ export default function FileItem(props: IProps) {
     useResources()
   const { file } = props
 
+  const handleVideoFile = (file: BlobPart) => {
+    console.log('getVideoContent_back>>>>', file)
+    const blob = new Blob([file], { type: 'video/mp4' })
+    const url = URL.createObjectURL(blob)
+    setcurrentfileurl(url)
+  }
+  const handleImgFile = (file: BlobPart) => {
+    console.log('getVideoContent_back>>>>', file)
+    const blob = new Blob([file], { type: 'video/mp4' })
+    const url = URL.createObjectURL(blob)
+    setcurrentfileurl(url)
+  }
+
   const handleClick = () => {
     console.warn('handleClick>>>file', file)
     setSelectedFile(file)
@@ -39,10 +52,16 @@ export default function FileItem(props: IProps) {
     }
     api.sendMessage(params as unknown as IPCInfo)
     api.on('getVideoContent_back', (data: any) => {
-      console.log('getVideoContent_back>>>>', data)
-      const blob = new Blob([data.file], { type: 'video/mp4' })
-      const url = URL.createObjectURL(blob)
-      setcurrentfileurl(url)
+      switch (file.type) {
+        case 'video':
+          handleVideoFile(data.file)
+          break
+        case 'image':
+          handleImgFile(data.file)
+          break
+        default:
+          break
+      }
     })
   }
 

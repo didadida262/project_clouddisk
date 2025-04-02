@@ -44,6 +44,13 @@ export default function FileItem(props: IProps) {
     console.log('url>>>>', url)
     setcurrentfileurl(url)
   }
+  const handlePdfFile = (file: BlobPart, type: string) => {
+    console.log('getVideoContent_back>>>>', file)
+    const blob = new Blob([file], { type: 'application/pdf' })
+    const url = URL.createObjectURL(blob)
+    console.log('url>>>>handlePdfFile', url)
+    setcurrentfileurl(url)
+  }
 
   const handleClick = () => {
     console.warn('handleClick>>>file', file)
@@ -59,7 +66,11 @@ export default function FileItem(props: IProps) {
           handleVideoFile(data.file)
           break
         case 'image':
+          handleCommonFile(data.file, file.type)
+          break
         case 'pdf':
+          handlePdfFile(data.file, file.type)
+          break
         case 'audio':
           handleCommonFile(data.file, file.type)
           break

@@ -9,6 +9,7 @@ import FileList from '../components/FileList'
 import VideoContainer from '../components/VideoContainer'
 import ImgContainer from '../components/ImgContainer'
 import AudioContainer from '../components/AudioContainer'
+import PdfContainer from '../components/PdfContainer'
 
 interface IProps {}
 
@@ -43,6 +44,7 @@ export default function MainPage(props: IProps) {
             {selectedFile.type === 'video' && <VideoContainer />}
             {selectedFile.type === 'image' && <ImgContainer />}
             {selectedFile.type === 'audio' && <AudioContainer />}
+            {selectedFile.type === 'pdf' && <PdfContainer />}
           </div>
           <div className="Filelist w-full h-[120px]">
             <FileList />

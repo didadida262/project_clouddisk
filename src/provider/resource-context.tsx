@@ -13,6 +13,8 @@ interface ResourcesContextType {
   selectedCate: any
   selectedFile: any
   currentfileurl: any
+  palyerMode: string
+  setPalyerMode: (mode: string) => void
   setcurrentfileurl: (file: any) => void
   setSelectedFile: (file: any) => void
   setSelectedCate: (file: any) => void
@@ -27,6 +29,7 @@ const ResourcesContext = createContext<ResourcesContextType | undefined>(
 
 export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
   const [currentpath, setCurrentpath] = useState<string>('')
+  const [palyerMode, setPalyerMode] = useState<string>('order')
   const [currentfileurl, setcurrentfileurl] = useState<any>()
   const [categories, setCategories] = useState<any[]>([])
   const [sourcelist, setSourcelist] = useState<any[]>([])
@@ -43,14 +46,16 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
         currentpath,
         categories,
         sourcelist,
+        palyerMode,
+        selectedCate,
+        selectedFile,
+        currentfileurl,
+        setPalyerMode,
         setCurrentpath,
         setSourcelist,
         setCategories,
-        selectedCate,
         setSelectedCate,
-        selectedFile,
         setSelectedFile,
-        currentfileurl,
         setcurrentfileurl,
       }}
     >

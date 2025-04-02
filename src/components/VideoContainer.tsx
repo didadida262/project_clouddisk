@@ -3,10 +3,12 @@ import { useResources } from '../provider/resource-context'
 import { Button } from 'antd'
 
 export default function VideoContainer() {
-  const { currentfileurl } = useResources()
+  const { currentfileurl, palyerMode, setPalyerMode } = useResources()
 
   const handleNext = () => {}
-  const handlePlayMode = () => {}
+  const handlePlayMode = () => {
+    setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
+  }
 
   useEffect(() => {
     console.log('selectedFile>>>>change', currentfileurl)
@@ -25,9 +27,16 @@ export default function VideoContainer() {
         />
       </div>
       <div className="operation w-full h-[50px] flex justify-start items-center gap-x-[20px]">
-        <Button type="primary" onClick={handlePlayMode}>
-          顺序播放
-        </Button>
+        {palyerMode === 'order' ? (
+          <Button type="primary" onClick={handlePlayMode}>
+            顺序播放
+          </Button>
+        ) : (
+          <Button type="primary" onClick={handlePlayMode}>
+            随机播放
+          </Button>
+        )}
+
         <Button type="primary" onClick={handleNext}>
           下一首
         </Button>

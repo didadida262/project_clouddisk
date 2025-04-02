@@ -9,8 +9,15 @@ export default function VideoContainer() {
   }, currentfileurl)
 
   return (
-    <div className="w-full h-full markBorderG px-[8px] py-[8px] flex justify-center items-center markBorderL">
-      <video muted className="video" autoPlay src={currentfileurl} />
+    <div className="w-full h-full flex justify-center items-center">
+      <video
+        muted
+        className="w-full h-full object-fit"
+        autoPlay
+        loop
+        controls
+        src={currentfileurl}
+      />
     </div>
   )
 }

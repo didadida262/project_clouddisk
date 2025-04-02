@@ -27,3 +27,7 @@
 .markBorderG {
   border: 1px solid #383b45;
 }
+
+.markBorderR {
+  border: 1px solid red;
+}

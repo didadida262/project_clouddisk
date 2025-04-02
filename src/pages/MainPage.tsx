@@ -38,7 +38,7 @@ export default function MainPage(props: IProps) {
           <CategoryContainer />
         </div>
         <div className="w-[calc(100%_-_165px)] h-full flex flex-col justify-between items-center">
-          <div className="videoConatienr w-full h-[calc(100%_-_205px)]">
+          <div className="markBorderG w-full h-[calc(100%_-_205px)] px-[8px] py-[8px] ">
             {selectedFile.type === 'video' && <VideoContainer />}
             {selectedFile.type === 'image' && <ImgContainer />}
           </div>

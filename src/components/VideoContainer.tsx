@@ -9,6 +9,9 @@ export default function VideoContainer() {
   const handlePlayMode = () => {
     setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
   }
+  const handleVideoEnded = () => {
+    //   播放结束，下一个
+  }
 
   useEffect(() => {
     console.log('selectedFile>>>>change', currentfileurl)
@@ -21,9 +24,9 @@ export default function VideoContainer() {
           muted
           className="w-full h-full object-fit"
           autoPlay
-          loop
           controls
           src={currentfileurl}
+          onEnded={handleVideoEnded} // 直接监听结束事件
         />
       </div>
       <div className="operation w-full h-[50px] flex justify-start items-center gap-x-[20px]">

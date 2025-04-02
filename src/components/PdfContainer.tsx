@@ -1,9 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useResources } from '../provider/resource-context'
-import { Image } from 'antd'
+// import { Document, Page } from 'react-pdf'
+// import { pdfjs } from 'react-pdf'
+// import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+
+// // 配置PDF.js worker（必须）
+// pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 export default function PdfContainer() {
   const { currentfileurl } = useResources()
+  const [numPages, setNumPages] = useState<number | null>(null)
 
   useEffect(() => {
     console.log('pdf_modules>>>', currentfileurl)
@@ -11,14 +17,20 @@ export default function PdfContainer() {
 
   return (
     <div className="w-full h-full flex justify-center items-center overflow-y-auto">
-      {/* 方式1 */}
-      <iframe src={currentfileurl} width="100%" title="PDF Viewer" />
-      {/* 方式2 */}
-      {/* <object data={currentfileurl} type="application/pdf" width="100%">
-        <p>
-          您的浏览器不支持PDF预览，请<a href={currentfileurl}>下载PDF</a>。
-        </p>
-      </object> */}
+      <iframe
+        src={currentfileurl}
+        width="100%"
+        height="500px"
+        title="PDF Viewer"
+      />
+      {/* <Document
+        file={currentfileurl}
+        onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+      >
+        {Array.from({ length: numPages || 0 }, (_, i) => (
+          <Page key={`page_${i + 1}`} pageNumber={i + 1} width={800} />
+        ))}
+      </Document> */}
     </div>
   )
 }

@@ -6,9 +6,13 @@ import api from '../api/index'
 import { useEffect } from 'react'
 
 export default function FileList() {
-  const { sourcelist } = useResources()
-  const { selectedFile, setSelectedFile, currentfileurl, setcurrentfileurl } =
-    useResources()
+  const {
+    sourcelist,
+    selectedFile,
+    setSelectedFile,
+    currentfileurl,
+    setcurrentfileurl,
+  } = useResources()
   const handleVideoFile = (file: BlobPart) => {
     const blob = new Blob([file], { type: 'video/mp4' })
     const url = URL.createObjectURL(blob)
@@ -26,7 +30,6 @@ export default function FileList() {
   }
 
   const handleSelect = (file: any) => {
-    setSelectedFile(file)
     const params = {
       type: 'getVideoContent',
       data: file.path,
@@ -53,7 +56,6 @@ export default function FileList() {
   }
 
   useEffect(() => {
-    console.log('selectedFile>>>', selectedFile)
     if (!selectedFile.name) return
     handleSelect(selectedFile)
   }, [selectedFile])

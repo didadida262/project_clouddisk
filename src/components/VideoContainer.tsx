@@ -3,14 +3,32 @@ import { useResources } from '../provider/resource-context'
 import { Button } from 'antd'
 
 export default function VideoContainer() {
-  const { currentfileurl, palyerMode, setPalyerMode } = useResources()
+  const {
+    currentfileurl,
+    palyerMode,
+    setPalyerMode,
+    selectedFile,
+    sourcelist,
+  } = useResources()
 
   const handleNext = () => {}
   const handlePlayMode = () => {
     setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
   }
   const handleVideoEnded = () => {
-    //   播放结束，下一个
+    //   播放结束，根据当前播放模式，选择下一个
+    const currentIndex = sourcelist.findIndex(
+      item => item.name === selectedFile.name
+    )
+    let nextFileIndex =
+      palyerMode === 'order'
+        ? currentIndex + 1
+        : Math.random() * sourcelist.length
+    if (nextFileIndex >= sourcelist.length) {
+      nextFileIndex = 0
+    }
+    const nextFile = sourcelist[nextFileIndex]
+    selectedFile(nextFile)
   }
 
   useEffect(() => {

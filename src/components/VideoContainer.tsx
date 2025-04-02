@@ -2,15 +2,15 @@ import { useEffect } from 'react'
 import { useResources } from '../provider/resource-context'
 
 export default function VideoContainer() {
-  const { selectedFile } = useResources()
+  const { currentfileurl } = useResources()
 
   useEffect(() => {
-    console.log('selectedFile>>>>', selectedFile)
-  }, selectedFile)
+    console.log('selectedFile>>>>change', currentfileurl)
+  }, currentfileurl)
 
   return (
     <div className="w-full h-full markBorderG px-[8px] py-[8px] flex justify-center items-center">
-      <video muted className="video" autoPlay src={selectedFile.fileContent} />
+      <video muted className="video" autoPlay src={currentfileurl} />
     </div>
   )
 }

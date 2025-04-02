@@ -26,7 +26,8 @@ const renderIcon = (type: FileType) => {
   return mapIcon[type] ? mapIcon[type] : <FileUnknownOutlined />
 }
 export default function FileItem(props: IProps) {
-  const { selectedFile, setSelectedFile } = useResources()
+  const { selectedFile, setSelectedFile, currentfileurl, setcurrentfileurl } =
+    useResources()
   const { file } = props
 
   const handleClick = () => {
@@ -38,13 +39,11 @@ export default function FileItem(props: IProps) {
     }
     api.sendMessage(params as unknown as IPCInfo)
     api.on('getVideoContent_back', (data: any) => {
-      console.log('反馈结果>>>>', data)
-      setSelectedFile({
-        ...selectedFile,
-        fileContent: data.file,
-      })
+      console.log('getVideoContent_back>>>>', data)
+      const blob = new Blob([data.file], { type: 'video/mp4' })
+      const url = URL.createObjectURL(blob)
+      setcurrentfileurl(url)
     })
-    console.log('select>>>', file)
   }
 
   return (

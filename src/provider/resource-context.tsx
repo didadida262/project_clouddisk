@@ -12,6 +12,8 @@ interface ResourcesContextType {
   sourcelist: any[]
   selectedCate: any
   selectedFile: any
+  currentfileurl: any
+  setcurrentfileurl: (file: any) => void
   setSelectedFile: (file: any) => void
   setSelectedCate: (file: any) => void
   setCurrentpath: (path: string) => void
@@ -25,6 +27,7 @@ const ResourcesContext = createContext<ResourcesContextType | undefined>(
 
 export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
   const [currentpath, setCurrentpath] = useState<string>('')
+  const [currentfileurl, setcurrentfileurl] = useState<any>()
   const [categories, setCategories] = useState<any[]>([])
   const [sourcelist, setSourcelist] = useState<any[]>([])
   const [selectedCate, setSelectedCate] = useState<any>({})
@@ -47,6 +50,8 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
         setSelectedCate,
         selectedFile,
         setSelectedFile,
+        currentfileurl,
+        setcurrentfileurl,
       }}
     >
       {children}

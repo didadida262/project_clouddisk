@@ -39,15 +39,17 @@ export default function FileItem(props: IProps) {
         'w-[100px] h-[110px] flex flex-col justify-between items-center hover:cursor-pointer',
         'border-[1px] border-solid border-[#383b45]',
         'hover:border-[#0acaff] hover:border-[3px]',
-        selectedFile.name === file.name ? 'border-[#0acaff] border-[3px]' : ''
+        selectedFile.name === file.name ? 'border-[#0acaff] border-[3px]' : '',
+        'mx-[10px]'
       )}
+      style={{display: 'inline-block'}}
       onClick={handleClick}
     >
       <div className="w-full h-[calc(100%_-_30px)] flex justify-center items-center text-[30px]">
         {renderIcon(file.type)}
       </div>
       <div className="w-full h-[30px] flex justify-center items-center truncate text-[12px]">
-        {file.name}
+        {file.name.length > 10? file.name.slice(0,10) + '...': file.name}
       </div>
     </div>
   )

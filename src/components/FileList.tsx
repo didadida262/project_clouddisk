@@ -63,9 +63,10 @@ export default function FileList() {
   return (
     <div
       className={cn(
-        'w-full h-full flex justify-start items-center gap-x-[20px]',
-        'overflow-x-auto'
+        'w-full h-full',
+        'overflow-x-auto',
       )}
+      style={{whiteSpace: 'nowrap'}}
     >
       {sourcelist.map((file: any, index: number) => (
         <FileItem file={file} key={index}></FileItem>

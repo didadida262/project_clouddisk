@@ -17,14 +17,14 @@ interface ResourcesContextType {
   currentpath: string
   categories: any[]
   sourcelist: any[]
-  selectedCate: any
-  selectedFile: any
+  currentCate: any
+  currentFile: any
   currentfileurl: any
   palyerMode: string
   setPalyerMode: (mode: string) => void
   setcurrentfileurl: (file: any) => void
-  setSelectedFile: (file: any) => void
-  setSelectedCate: (file: any) => void
+  setCurrentFile: (file: any) => void
+  setCurrentCate: (file: any) => void
   setCurrentpath: (path: string) => void
   setCategories: (categories: any[]) => void
   setSourcelist: (categories: any[]) => void
@@ -37,12 +37,12 @@ const ResourcesContext = createContext<ResourcesContextType | undefined>(
 
 export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
   const [currentpath, setCurrentpath] = useState<string>('')
-  const [palyerMode, setPalyerMode] = useState<string>('order')
+  const [currentCate, setCurrentCate] = useState<any>({})
+  const [currentFile, setCurrentFile] = useState<any>({})
   const [currentfileurl, setcurrentfileurl] = useState<any>()
+  const [palyerMode, setPalyerMode] = useState<string>('order')
   const [categories, setCategories] = useState<any[]>([])
   const [sourcelist, setSourcelist] = useState<any[]>([])
-  const [selectedCate, setSelectedCate] = useState<any>({})
-  const [selectedFile, setSelectedFile] = useState<any>({})
 
   const handleVideoFile = (file: BlobPart) => {
     const blob = new Blob([file], { type: 'video/mp4' })
@@ -97,15 +97,15 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
         categories,
         sourcelist,
         palyerMode,
-        selectedCate,
-        selectedFile,
+        currentCate,
+        currentFile,
         currentfileurl,
         setPalyerMode,
         setCurrentpath,
         setSourcelist,
         setCategories,
-        setSelectedCate,
-        setSelectedFile,
+        setCurrentCate,
+        setCurrentFile,
         setcurrentfileurl,
         selectFile,
       }}

@@ -7,10 +7,10 @@ export default function VideoContainer() {
     currentfileurl,
     palyerMode,
     setPalyerMode,
-    selectedFile,
+    currentFile,
     sourcelist,
     selectFile,
-    setSelectedFile,
+    setCurrentFile,
   } = useResources()
 
   const handleNext = () => {}
@@ -20,7 +20,7 @@ export default function VideoContainer() {
   const handleVideoEnded = () => {
     //   播放结束，根据当前播放模式，选择下一个
     const currentIndex = sourcelist.findIndex(
-      item => item.name === selectedFile.name
+      item => item.name === currentFile.name
     )
     let nextFileIndex =
       palyerMode === 'order'
@@ -30,17 +30,17 @@ export default function VideoContainer() {
       nextFileIndex = 0
     }
     const nextFile = sourcelist[nextFileIndex]
-    setSelectedFile(nextFile)
+    setCurrentFile(nextFile)
   }
 
   useEffect(() => {
-    console.log('selectedFile>>>>change', currentfileurl)
+    console.log('currentFile>>>>change', currentfileurl)
   }, currentfileurl)
 
   useEffect(() => {
-    if (!selectedFile.name) return
-    selectFile(selectedFile)
-  }, [selectedFile])
+    if (!currentFile.name) return
+    selectFile(currentFile)
+  }, [currentFile])
 
   return (
     <div className="w-full h-full flex justify-between items-center flex-col">

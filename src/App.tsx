@@ -14,7 +14,6 @@ const App = () => {
   return (
     <ResourcesProvider>
       <div className="App w-screen h-screen">
-        {/* {currentpath ? <MainPage currentpath={currentpath} /> : <SelectDir setCurrentpath={setCurrentpath} setCategories={setCategories} />} */}
         <MainPage />
       </div>
     </ResourcesProvider>

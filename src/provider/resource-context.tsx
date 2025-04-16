@@ -29,6 +29,7 @@ interface ResourcesContextType {
   setCategories: (categories: any[]) => void
   setSourcelist: (categories: any[]) => void
   selectFile: (file: TFile) => void
+  getNextVideo: () => void
 }
 
 const ResourcesContext = createContext<ResourcesContextType | undefined>(
@@ -43,6 +44,22 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
   const [palyerMode, setPalyerMode] = useState<string>('order')
   const [categories, setCategories] = useState<any[]>([])
   const [sourcelist, setSourcelist] = useState<any[]>([])
+
+  const getNextVideo = () => {
+    //   播放结束，根据当前播放模式，选择下一个
+    const currentIndex = sourcelist.findIndex(
+      item => item.name === currentFile.name
+    )
+    let nextFileIndex =
+      palyerMode === 'order'
+        ? currentIndex + 1
+        : Math.random() * sourcelist.length
+    if (nextFileIndex >= sourcelist.length) {
+      nextFileIndex = 0
+    }
+    const nextFile = sourcelist[nextFileIndex]
+    return nextFile
+  }
 
   const handleVideoFile = (file: BlobPart) => {
     const blob = new Blob([file], { type: 'video/mp4' })
@@ -108,6 +125,7 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
         setCurrentFile,
         setcurrentfileurl,
         selectFile,
+        getNextVideo,
       }}
     >
       {children}

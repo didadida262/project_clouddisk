@@ -8,9 +8,9 @@ export default function VideoContainer() {
     palyerMode,
     setPalyerMode,
     currentFile,
-    sourcelist,
     selectFile,
     setCurrentFile,
+    getNextVideo,
   } = useResources()
 
   const handleNext = () => {}
@@ -18,18 +18,7 @@ export default function VideoContainer() {
     setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
   }
   const handleVideoEnded = () => {
-    //   播放结束，根据当前播放模式，选择下一个
-    const currentIndex = sourcelist.findIndex(
-      item => item.name === currentFile.name
-    )
-    let nextFileIndex =
-      palyerMode === 'order'
-        ? currentIndex + 1
-        : Math.random() * sourcelist.length
-    if (nextFileIndex >= sourcelist.length) {
-      nextFileIndex = 0
-    }
-    const nextFile = sourcelist[nextFileIndex]
+    const nextFile = getNextVideo()
     setCurrentFile(nextFile)
   }
 

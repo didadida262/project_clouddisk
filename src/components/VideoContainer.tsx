@@ -13,18 +13,15 @@ export default function VideoContainer() {
     getNextVideo,
   } = useResources()
 
-  const handleNext = () => {}
   const handlePlayMode = () => {
     setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
   }
-  const handleVideoEnded = () => {
+  const handleNext = () => {
     const nextFile = getNextVideo()
     setCurrentFile(nextFile)
   }
 
-  useEffect(() => {
-    console.log('currentFile>>>>change', currentfileurl)
-  }, currentfileurl)
+  useEffect(() => {}, currentfileurl)
 
   useEffect(() => {
     if (!currentFile.name) return
@@ -40,7 +37,7 @@ export default function VideoContainer() {
           autoPlay
           controls
           src={currentfileurl}
-          onEnded={handleVideoEnded} // 直接监听结束事件
+          onEnded={handleNext} // 直接监听结束事件
         />
       </div>
       <div className="operation w-full h-[50px] flex justify-start items-center gap-x-[20px]">

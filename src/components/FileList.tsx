@@ -6,67 +6,17 @@ import api from '../api/index'
 import { useEffect } from 'react'
 
 export default function FileList() {
-  const {
-    sourcelist,
-    selectedFile,
-    setSelectedFile,
-    currentfileurl,
-    setcurrentfileurl,
-  } = useResources()
-  const handleVideoFile = (file: BlobPart) => {
-    const blob = new Blob([file], { type: 'video/mp4' })
-    const url = URL.createObjectURL(blob)
-    setcurrentfileurl(url)
-  }
-  const handleCommonFile = (file: BlobPart, type: string) => {
-    const blob = new Blob([file])
-    const url = URL.createObjectURL(blob)
-    setcurrentfileurl(url)
-  }
-  const handlePdfFile = (file: BlobPart, type: string) => {
-    const blob = new Blob([file], { type: 'application/pdf' })
-    const url = URL.createObjectURL(blob)
-    setcurrentfileurl(url)
-  }
-
-  const handleSelect = (file: any) => {
-    const params = {
-      type: 'getVideoContent',
-      data: file.path,
-    }
-    api.sendMessage(params as unknown as IPCInfo)
-    api.on('getVideoContent_back', (data: any) => {
-      switch (file.type) {
-        case 'video':
-          handleVideoFile(data.file)
-          break
-        case 'image':
-          handleCommonFile(data.file, file.type)
-          break
-        case 'pdf':
-          handlePdfFile(data.file, file.type)
-          break
-        case 'audio':
-          handleCommonFile(data.file, file.type)
-          break
-        default:
-          break
-      }
-    })
-  }
+  const { sourcelist, selectedFile, selectFile } = useResources()
 
   useEffect(() => {
     if (!selectedFile.name) return
-    handleSelect(selectedFile)
+    selectFile(selectedFile)
   }, [selectedFile])
 
   return (
     <div
-      className={cn(
-        'w-full h-full',
-        'overflow-x-auto',
-      )}
-      style={{whiteSpace: 'nowrap'}}
+      className={cn('w-full h-full', 'overflow-x-auto')}
+      style={{ whiteSpace: 'nowrap' }}
     >
       {sourcelist.map((file: any, index: number) => (
         <FileItem file={file} key={index}></FileItem>

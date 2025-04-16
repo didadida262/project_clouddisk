@@ -9,6 +9,8 @@ export default function VideoContainer() {
     setPalyerMode,
     selectedFile,
     sourcelist,
+    selectFile,
+    setSelectedFile,
   } = useResources()
 
   const handleNext = () => {}
@@ -28,12 +30,17 @@ export default function VideoContainer() {
       nextFileIndex = 0
     }
     const nextFile = sourcelist[nextFileIndex]
-    selectedFile(nextFile)
+    setSelectedFile(nextFile)
   }
 
   useEffect(() => {
     console.log('selectedFile>>>>change', currentfileurl)
   }, currentfileurl)
+
+  useEffect(() => {
+    if (!selectedFile.name) return
+    selectFile(selectedFile)
+  }, [selectedFile])
 
   return (
     <div className="w-full h-full flex justify-between items-center flex-col">

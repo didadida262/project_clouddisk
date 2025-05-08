@@ -21,7 +21,7 @@ export default function CategoryContainer() {
   }
 
   return (
-    <div className="w-full h-full markBorderG px-[8px] py-[8px] gap-y-2 overflow-y-scroll">
+    <div className="w-full h-full markBorderG px-[8px] py-[8px] flex flex-col justify-start gap-y-2 overflow-y-scroll">
       {categories.map((item: any, index: number) => (
         <div
           key={index}

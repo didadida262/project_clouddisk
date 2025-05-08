@@ -82,6 +82,7 @@ export const ResourcesProvider = ({ children }: { children: ReactNode }) => {
       type: 'getVideoContent',
       data: file.path,
     }
+    // 打点
     api.sendMessage(params as unknown as IPCInfo)
     api.on('getVideoContent_back', (data: any) => {
       switch (file.type) {

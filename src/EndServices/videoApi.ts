@@ -31,56 +31,58 @@ export const handleGetVideo = (
   event: Electron.IpcMainInvokeEvent,
   message: eventInfo
 ): void => {
-  const path = message.data
-  fs.readFile(path, (err: Error, data: any) => {
-    console.log('data>>1', data)
-    console.log('data>>2', data.length)
-    // <Buffer 00 00 00 18 66 74 79....>
-    console.log('data>>3', typeof data)
-    event.sender.send('getVideoContent_back', {
-      name: message.data.name,
-      file: data,
+  const videoPath = message.data
+  const stat = fs.statSync(videoPath)
+  const videoSize = stat.size
+  console.log('videoSize>>>', videoSize)
+  // 每个数据块的大小，这里设置为 1MB
+  const chunkSize = 1 * 1024 * 1024
+  let start = 0
+
+  const sendChunk = () => {
+    const end = Math.min(start + chunkSize, videoSize)
+    const readStream = fs.createReadStream(videoPath, { start, end })
+
+    readStream.on('data', (chunk: any) => {
+      event.sender.send('getVideoContent_back', {
+        name: path.basename(videoPath),
+        file: chunk,
+        start,
+        end,
+        isLastChunk: end === videoSize,
+      })
     })
-  })
+
+    readStream.on('end', () => {
+      start = end
+      if (start < videoSize) {
+        sendChunk()
+      }
+    })
+
+    readStream.on('error', (err: any) => {
+      console.error('读取视频数据出错:', err)
+    })
+  }
+
+  sendChunk()
 }
-
-// export const handleGetVideo = (event: Electron.IpcMainInvokeEvent, message: eventInfo): void => {
-//   // 1. 维护一个已发送长度
-//   // 3. 当已发送长度等于文件总长度，退出循环
-
-//   const videoPath = message.data.path
-//   const stat = fs.statSync(videoPath);
-//   const videoSize = stat.size;
-//   console.log('videoSize>>>', videoSize)
-//   // 1m大小
-//   const chunkSize = 30 * 1024 * 1024
-
-// // 成功
-// // 指定开始和结束的字节位置
-//   let start = 0; // 从文件开头开始
-//   let end = chunkSize; // 读取10个字节
-
-//   // 创建可读流
-//   const readStream = fs.createReadStream(videoPath, { start, end:videoSize });
-//   // 处理流数据
-//   let data = Buffer.alloc(0)
-//   // Buffer.alloc(0)
-//   readStream.on('data', (chunk:any) => {
-//     console.log('读取内容>>>', chunk)
-//     console.log('当前data>>>', data)
-//     data = Buffer.concat([data, chunk])
-//   });
-
-//   // 处理流结束
-//   readStream.on('end', () => {
-//     console.log('发送shuju>>>', data)
+// 老版本全量读取
+// export const handleGetVideo = (
+//   event: Electron.IpcMainInvokeEvent,
+//   message: eventInfo
+// ): void => {
+//   const path = message.data
+//   fs.readFile(path, (err: Error, data: any) => {
+//     console.log('data>>1', data)
+//     console.log('data>>2', data.length)
+//     // <Buffer 00 00 00 18 66 74 79....>
+//     console.log('data>>3', typeof data)
 //     event.sender.send('getVideoContent_back', {
 //       name: message.data.name,
-//       file: data
+//       file: data,
 //     })
-//     readStream.destroy()
-
-//   });
+//   })
 // }
 
 export const handleGetAllCates = (

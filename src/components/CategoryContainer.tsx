@@ -4,12 +4,11 @@ import api from '../api/index'
 import { IPCInfo } from '../utils/index'
 
 export default function CategoryContainer() {
-  const { categories, setSourcelist, selectedCate, setSelectedCate } =
+  const { categories, setSourcelist, currentCate, setCurrentCate } =
     useResources()
 
   const handleClick = (file: any) => {
-    console.log('select_cate>>', file)
-    setSelectedCate(file)
+    setCurrentCate(file)
     const path = file.path
     const params = {
       type: 'getAllFiles',
@@ -17,24 +16,23 @@ export default function CategoryContainer() {
     }
     api.sendMessage(params as unknown as IPCInfo)
     api.on('getAllFiles_back', (data: any) => {
-      console.log('反馈结果>>>>', data)
       setSourcelist(data.files)
     })
   }
 
   return (
-    <div className="w-full h-full markBorderG px-[8px] py-[8px] gap-y-2 overflow-y-scroll">
+    <div className="w-full h-full markBorderG px-[8px] py-[8px] flex flex-col justify-start gap-y-2 overflow-y-scroll">
       {categories.map((item: any, index: number) => (
         <div
           key={index}
           className={cn(
             'w-full h-[40px] markBorderG text-[14px] flex justify-center items-center',
             'hover:bg-[#383b45] rounded-[4px] hover:cursor-pointer',
-            selectedCate.name === item.name ? 'bg-[#383b45]' : ''
+            currentCate.name === item.name ? 'bg-[#383b45]' : ''
           )}
           onClick={() => handleClick(item)}
         >
-          {item.name.length > 8? item.name.slice(0,10) + '...': item.name}
+          {item.name.length > 8 ? item.name.slice(0, 10) + '...' : item.name}
         </div>
       ))}
     </div>

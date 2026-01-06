@@ -53,12 +53,12 @@ async function registerListeners() {
         console.log('getVideoContent>>>>', message)
         handleGetVideo(event, message)
         break
-      //   case 'getAllCates':
-      //     handleGetAllCates(event, message)
-      //     break
-      //   case 'getAllVideosInCate':
-      //     handleGetAllItems(event, message)
-      //     break
+      case 'getAllCates':
+        handleGetAllCates(event, message)
+        break
+      case 'getAllVideosInCate':
+        handleGetAllItems(event, message)
+        break
       default:
         break
     }

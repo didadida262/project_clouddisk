@@ -7,33 +7,26 @@ export default function VideoContainer() {
     currentfileurl,
     palyerMode,
     setPalyerMode,
-    selectedFile,
-    sourcelist,
+    currentFile,
+    selectFile,
+    setCurrentFile,
+    getNextVideo,
   } = useResources()
 
-  const handleNext = () => {}
   const handlePlayMode = () => {
     setPalyerMode(palyerMode === 'order' ? 'random' : 'order')
   }
-  const handleVideoEnded = () => {
-    //   播放结束，根据当前播放模式，选择下一个
-    const currentIndex = sourcelist.findIndex(
-      item => item.name === selectedFile.name
-    )
-    let nextFileIndex =
-      palyerMode === 'order'
-        ? currentIndex + 1
-        : Math.random() * sourcelist.length
-    if (nextFileIndex >= sourcelist.length) {
-      nextFileIndex = 0
-    }
-    const nextFile = sourcelist[nextFileIndex]
-    selectedFile(nextFile)
+  const handleNext = () => {
+    const nextFile = getNextVideo()
+    setCurrentFile(nextFile)
   }
 
+  useEffect(() => {}, currentfileurl)
+
   useEffect(() => {
-    console.log('selectedFile>>>>change', currentfileurl)
-  }, currentfileurl)
+    if (!currentFile.name) return
+    selectFile(currentFile)
+  }, [currentFile])
 
   return (
     <div className="w-full h-full flex justify-between items-center flex-col">
@@ -44,7 +37,7 @@ export default function VideoContainer() {
           autoPlay
           controls
           src={currentfileurl}
-          onEnded={handleVideoEnded} // 直接监听结束事件
+          onEnded={handleNext} // 直接监听结束事件
         />
       </div>
       <div className="operation w-full h-[50px] flex justify-start items-center gap-x-[20px]">
